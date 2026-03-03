@@ -4,7 +4,11 @@ An adapted fork of [tolibear/promptify-skill](https://github.com/tolibear/prompt
 
 ## Purpose
 
-This fork exists to track upstream changes from tolibear/promptify-skill for potential cherry-picking. The working version of the skill lives in the [Personal-Workspace](https://github.com/pfgannon/Personal-Workspace) `.claude/skills/promptify/` directory and has diverged from the upstream structure.
+This is a **one-way fork**. It exists solely to monitor upstream changes in tolibear/promptify-skill for potential cherry-picking into our adapted version. **No contributions, pull requests, or changes will ever be sent back to the upstream repository.**
+
+The GitHub fork relationship is maintained only for convenient diffing — not for collaboration with upstream.
+
+The working version of the skill lives in the [Personal-Workspace](https://github.com/pfgannon/Personal-Workspace) `.claude/skills/promptify/` directory and has diverged significantly from the upstream structure.
 
 ## Differences from Upstream
 
@@ -23,13 +27,20 @@ This skill is **not installed from this repo**. To use it:
 
 ## Upstream Tracking
 
+This fork is **read-only with respect to upstream**. We pull upstream changes to review them — we never push anything back.
+
 To identify upstream changes worth incorporating:
 
 ```bash
+git fetch upstream
 git diff main upstream/main -- SKILL.md
 ```
 
 The structural differences (deleted `agents/`, `commands/`, `.claude-plugin/` directories) are intentional and should not be reconciled.
+
+## Using This Skill
+
+This repo is public. You're welcome to use or adapt `SKILL.md` for your own Claude Code setup — just copy it into `.claude/skills/promptify/` in your workspace.
 
 ## License
 
