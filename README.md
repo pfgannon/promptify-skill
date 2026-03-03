@@ -1,101 +1,47 @@
-# Promptify
+# Promptify (Adapted Fork)
 
-Optimize your prompts. One command, stackable modifiers.
+An adapted fork of [tolibear/promptify-skill](https://github.com/tolibear/promptify-skill) — a prompt optimization skill for Claude Code.
 
-Works in **Claude Code** and **molt.bot**.
+## Purpose
 
-## Install
+This is a **one-way fork**. It exists solely to monitor upstream changes in tolibear/promptify-skill for potential cherry-picking into our adapted version. **No contributions, pull requests, or changes will ever be sent back to the upstream repository.**
 
-**Claude Code:**
+The GitHub fork relationship is maintained only for convenient diffing — not for collaboration with upstream.
+
+The working version of the skill lives in the [Personal-Workspace](https://github.com/pfgannon/Personal-Workspace) `.claude/skills/promptify/` directory and has diverged significantly from the upstream structure.
+
+## Differences from Upstream
+
+- **No separate agent definitions** — agent instructions (codebase researcher, clarifier, web researcher) are inlined directly in SKILL.md
+- **No slash command** — `commands/promptify.md` removed; functions as a skill, not a plugin command
+- **No plugin manifest** — `.claude-plugin/` directory removed
+- **Self-contained** — everything needed is in a single `SKILL.md` file
+- **All third-party platform references removed**
+
+## Installation
+
+This skill is **not installed from this repo**. To use it:
+
+1. Copy `SKILL.md` into `.claude/skills/promptify/` in your workspace
+2. The skill will be available automatically in Claude Code
+
+## Upstream Tracking
+
+This fork is **read-only with respect to upstream**. We pull upstream changes to review them — we never push anything back.
+
+To identify upstream changes worth incorporating:
+
 ```bash
-claude plugin install promptify@tolibear
+git fetch upstream
+git diff main upstream/main -- SKILL.md
 ```
 
-**Molt.bot:**
-```bash
-npx molthub install promptify
-```
+The structural differences (deleted `agents/`, `commands/`, `.claude-plugin/` directories) are intentional and should not be reconciled.
 
-## Usage
+## Using This Skill
 
-```
-/promptify [+modifiers] your prompt here
-```
-
-## Modifiers
-
-| Modifier | Effect |
-|----------|--------|
-| `+ask` | Ask clarifying questions first |
-| `+deep` | Explore codebase for context |
-| `+web` | Search web for best practices |
-
-Stack them:
-
-```
-/promptify +ask+deep+web Build a payment system
-```
-
-## Smart Auto-Detection (v3)
-
-Skip modifiers - promptify auto-detects what's needed:
-
-| Your Prompt | Auto-Triggers |
-|-------------|---------------|
-| "Add auth to our API" | Codebase research |
-| "Help me with this thing" | Clarifying questions |
-| "Best practices for React hooks" | Web search |
-| "Write a landing page" | Direct optimization |
-
-## Example
-
-**Before:**
-```
-Build a payment system
-```
-
-**After:**
-```
-You are a senior backend engineer with Stripe integration experience.
-
-<task>
-1. Analyze payment requirements (one-time vs recurring, currencies, refunds)
-2. Design the data model (customers, payments, subscriptions)
-3. Implement Stripe integration with proper error handling
-4. Add webhook handlers for payment events
-5. Include idempotency keys for safe retries
-</task>
-
-<constraints>
-- Use Stripe API v2024-01
-- Handle card failures gracefully with user-friendly messages
-- Log all payment events for debugging
-- Never store raw card numbers
-</constraints>
-
-<output>
-Working implementation with:
-- Payment service class
-- Webhook controller
-- Database migrations
-- Test coverage for happy path and failure cases
-</output>
-```
-
-## What It Does
-
-- Analyzes images you include
-- Uses conversation context
-- Detects prompt type (coding, writing, analysis, creative, data)
-- Converts output requests to process-oriented prompts
-- Removes anti-patterns (filler, excessive politeness)
-- Enforces Role, Task, Constraints, Output
-- Copies to clipboard
-
-## Changelog
-
-**v3.0.0** - Rewritten for Claude 4.x. 65% shorter (163→57 lines). Progressive disclosure. Contract-first design.
+This repo is public. You're welcome to use or adapt `SKILL.md` for your own Claude Code setup — just copy it into `.claude/skills/promptify/` in your workspace.
 
 ## License
 
-MIT
+MIT — see [upstream repo](https://github.com/tolibear/promptify-skill) for original license.
